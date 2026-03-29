@@ -14,69 +14,56 @@ float averageGrade(int arr[], int size){
     float temp = 0;
 
     for (int i = 0; i < size; i++){
-        temp += arr[i];
-    }
-
+            temp += arr[i];
+        }
+    
     return temp / size;
 
 }
 
+void printStudent(struct Student student){
+    printf("\n%s\n", student.name);
+    printf("Grades: ");
+    for (int i = 0; i < SUBJECTS; i++){
+        printf("%d ", student.grades[i]);
+    }
+    printf("\nAverage: %.2f\n", student.average);
+}
+
+
+
+
 int main(){
 
-    struct Student s1;
 
-    strcpy(s1.name, "Johnathan Majors");
-    s1.grades[0] = 82;
-    s1.grades[1] = 98;
-    s1.grades[2] = 87;
-    s1.grades[3] = 76;
-    s1.grades[4] = 82;
+    struct Student students[] = {{"Johnathan Majors", {82, 98, 87, 76, 82}, 0},
+                                {"Daniel Loafman", {56,73,77,89,82}, 0},
+                                {"Henry Robinson", {62, 83, 94, 90, 71}, 0}};
 
-
-    struct Student s2;
-    strcpy(s2.name, "Daniel Loafman");
-    s2.grades[0] = 56;
-    s2.grades[1] = 73;
-    s2.grades[2] = 77;
-    s2.grades[3] = 89;
-    s2.grades[4] = 82;
-
-    struct Student s3;
-    strcpy(s3.name, "Henry Robinson");
-    s3.grades[0] = 62;
-    s3.grades[1] = 83;
-    s3.grades[2] = 94;
-    s3.grades[3] = 90;
-    s3.grades[4] = 71;
-
-    s1.average = averageGrade(s1.grades, SUBJECTS);
-    s2.average = averageGrade(s2.grades, SUBJECTS);
-    s3.average = averageGrade(s3.grades, SUBJECTS);
     
-    // Student 1
-    printf("%s\n", s1.name);
-    printf("Grades: ");
-    for(int i = 0; i < SUBJECTS; i++){
-        printf("%d ", s1.grades[i]);
-    }
-    printf("\nAverage: %.2f\n", s1.average);
+    int numOfStudents = sizeof(students) / sizeof(students[0]);
     
-    //Student 2
-    printf("%s\n", s2.name);
-    printf("Grades: ");
-    for(int i = 0; i < SUBJECTS; i++){
-        printf("%d ", s2.grades[i]);
+    for (int i = 0; i < numOfStudents; i++){
+        students[i].average = averageGrade(students[i].grades, SUBJECTS);
     }
-    printf("\nAverage: %.2f\n", s2.average);
+    
 
-    // Student 3
-    printf("%s\n", s3.name);
-    printf("Grades: ");
-    for(int i = 0; i < SUBJECTS; i++){
-        printf("%d ", s3.grades[i]);
+    for (int i = 0; i < numOfStudents; i++){
+        printStudent(students[i]);
     }
-    printf("\nAverage: %.2f\n", s3.average);
 
+    float max = students[0].average;
+    int index = 0;
+
+    for (int i = 1; i < numOfStudents; i++){
+        if (students[i].average > max){
+            max = students[i].average;
+            index = i;
+        }
+    }
+
+
+    printf("\nTop Student: %s (%.2f%%)",students[index].name, students[index].average);
 
     return 0;
 }
