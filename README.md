@@ -12,7 +12,7 @@ Topics:
 * Loops
 * Pointers
 * Functions
-
+* Structs
 
 
 
