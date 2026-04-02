@@ -21,7 +21,30 @@ float averageGrade(int arr[], int size){
 
 }
 
+
+void printIntArray(int *arr, size_t size){
+    printf("[");
+    for (int i = 0; i < size; i++){
+        printf("%d", arr[i]);
+        if (i < size - 1){
+            printf(", ");
+        }
+    }
+    printf("]\n");
+
+}
+
+void printAllStudents(struct Student *arrayOfStudents, int students){
+
+    for (int i = 0; i < students; i++){
+        printf("%s\n", arrayOfStudents[i].name);
+        printIntArray(arrayOfStudents[i].grades, SUBJECTS);
+        printf("Average: %.2f\n", arrayOfStudents[i].average);
+    }
+}
+
 void printStudent(struct Student student){
+    
     printf("\n%s\n", student.name);
     printf("Grades: ");
     for (int i = 0; i < SUBJECTS; i++){
@@ -38,7 +61,7 @@ int main(){
 
     struct Student students[] = {{"Johnathan Majors", {82, 98, 87, 76, 82}, 0},
                                 {"Daniel Loafman", {56,73,77,89,82}, 0},
-                                {"Henry Robinson", {62, 83, 94, 90, 71}, 0}};
+                                {"Henry Robinson", {62, 83, 94, 90, 71}, }};
 
     
     int numOfStudents = sizeof(students) / sizeof(students[0]);
@@ -63,7 +86,14 @@ int main(){
     }
 
 
-    printf("\nTop Student: %s (%.2f%%)",students[index].name, students[index].average);
+    printf("\nTop Student: %s (%.2f%%)\n",students[index].name, students[index].average);
+    
+    printAllStudents(students, numOfStudents);
+
+
+    int tens[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    printIntArray(tens, sizeof(tens) / sizeof(tens[0]));
+
 
     return 0;
 }
